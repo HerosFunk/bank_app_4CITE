@@ -2,8 +2,8 @@ const Account = require('./entities/Account');
 
 exports.createAccount = async (name, amount) => {
     try {
-        const newAccount = await Account.create({name, amount});
-        return newAccount.dataValues.id
+        const newAccount = await Account.create({ name, amount });
+        return newAccount.dataValues.id;
     } catch (error) {
         throw new Error('Error creating account');
     }
@@ -15,9 +15,25 @@ exports.getAccountById = async (accountId) => {
         if (!account) {
             throw new Error('Account not found');
         }
-        
         return account.get();
     } catch (error) {
         throw new Error('Error fetching account');
+    }
+};
+
+exports.getAccountByName = async (name) => {
+    try {
+        const account = await Account.findOne({ where: { name } });
+        return account ? account.get() : null;
+    } catch (error) {
+        throw new Error('Error fetching account by name');
+    }
+};
+
+exports.deleteAllAccounts = async () => {
+    try {
+        await Account.destroy({ where: {}, truncate: true });
+    } catch (error) {
+        throw new Error('Error deleting all accounts');
     }
 };
