@@ -1,5 +1,5 @@
 const { DataTypes, Sequelize } = require('sequelize');
-const sequelize = require('../config/database.config');
+const sequelize = require('../../config/database.config');
 
 const Account = sequelize.define('account', {
     id: {
@@ -10,6 +10,7 @@ const Account = sequelize.define('account', {
     name: DataTypes.STRING,
     amount: DataTypes.INTEGER,
 }, {
+    tableName: "account",
     timestamps: false
 });
 
