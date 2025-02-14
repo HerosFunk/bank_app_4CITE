@@ -10,3 +10,8 @@ Feature: Bank account management
         And an account with the name "Compte A" already exists
         When the user submits the account creation request
         Then the account creation should fail with an error message "Account name already exists"
+
+    Scenario: A user tries to create an account with an empty name
+        Given the account name ""
+        When the user submits the account creation request
+        Then the account creation should fail with an error message "Account name cannot be empty"
