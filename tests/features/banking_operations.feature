@@ -14,3 +14,9 @@ Feature: Banking operations between two accounts
         Then the transfer should fail with an error message "Insufficient funds"
         And Account A should still have 1000 units
         And Account B should still have 500 units
+
+    Scenario: A user tries to send money from a non-existent account
+        Given Account A with id "accountA" has 1000 units
+        When the user sends 200 units from Account A to a non-existent Account B
+        Then the transfer should fail with an error message "Account not found"
+        And Account A should still have 1000 units
