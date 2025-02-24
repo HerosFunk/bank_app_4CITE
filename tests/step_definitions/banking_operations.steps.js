@@ -26,6 +26,12 @@ When('the user sends {int} units from Account A to Account B', async function (a
         .send({ fromAccountId: accountAId, toAccountId: accountBId, amount });
 });
 
+When('the user sends {int} units from Account A to a non-existent Account B', async function (amount) {
+    response = await request(app)
+        .post('/api/v1/account/send')
+        .send({ fromAccountId: accountAId, toAccountId: 'nonExistentAccount', amount });
+});
+
 Then('Account A should have {int} units', async function (expectedAmount) {
     const account = await accountService.getAccountById(accountAId);
     if (account.amount !== expectedAmount) {
