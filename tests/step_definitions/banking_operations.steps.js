@@ -29,7 +29,7 @@ When('the user sends {int} units from Account A to Account B', async function (a
 When('the user sends {int} units from Account A to a non-existent Account B', async function (amount) {
     response = await request(app)
         .post('/api/v1/account/send')
-        .send({ fromAccountId: accountAId, toAccountId: 'nonExistentAccount', amount });
+        .send({ fromAccountId: accountAId, toAccountId: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', amount });
 });
 
 Then('Account A should have {int} units', async function (expectedAmount) {

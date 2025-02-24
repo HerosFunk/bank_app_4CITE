@@ -12,11 +12,10 @@ exports.createAccount = async (name, amount) => {
 exports.getAccountById = async (accountId) => {
     try {
         const account = await Account.findByPk(accountId);
-        if (!account) {
-            throw new Error('Account not found');
-        }
-        return account.get();
+
+        return account ? account.get() : null;
     } catch (error) {
+        console.log(error)
         throw new Error('Error fetching account');
     }
 };
@@ -26,6 +25,7 @@ exports.getAccountByName = async (name) => {
         const account = await Account.findOne({ where: { name } });
         return account ? account.get() : null;
     } catch (error) {
+        console.log(error)
         throw new Error('Error fetching account by name');
     }
 };
