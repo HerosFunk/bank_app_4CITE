@@ -55,3 +55,16 @@ Then('the account creation should fail with an error message {string}', function
         throw new Error(`Expected error message "${expectedErrorMessage}" but got "${response.body.error}"`);
     }
 });
+
+Given('the account name is empty', function () {
+    accountDetails.name = '';
+});
+
+Then('the account creation should fail with a validation error message {string}', function (expectedErrorMessage) {
+    if (response.status !== 400) {
+        throw new Error(`Expected status 400 but got ${response.status}`);
+    }
+    if (response.body.error !== expectedErrorMessage) {
+        throw new Error(`Expected error message "${expectedErrorMessage}" but got "${response.body.error}"`);
+    }
+});
