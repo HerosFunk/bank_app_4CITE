@@ -1,4 +1,4 @@
-Feature: Bank account management
+Feature: Bank account creation
     Scenario: A user wants to create an account
         Given the account name "Compte A"
         When the user submits the account creation request
