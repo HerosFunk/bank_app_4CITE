@@ -14,3 +14,14 @@ exports.createAccount = async (name, amount) => {
 exports.getAccountById = async (accountId) => {
     return await accountService.getAccountById(accountId);
 };
+
+exports.sendToAccount = async (fromAccountId, toAccountId, amount) => {
+    const fromAccount = await accountService.getAccountById(fromAccountId);
+    const toAccount = await accountService.getAccountById(toAccountId);
+
+    fromAccount.amount -= amount;
+    toAccount.amount += amount;
+
+    await accountService.updateAccount(fromAccount);
+    await accountService.updateAccount(toAccount);
+};

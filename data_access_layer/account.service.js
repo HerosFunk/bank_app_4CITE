@@ -37,3 +37,11 @@ exports.deleteAllAccounts = async () => {
         throw new Error('Error deleting all accounts');
     }
 };
+
+exports.updateAccount = async (account) => {
+    try {
+        await Account.update(account, { where: { id: account.id } });
+    } catch (error) {
+        throw new Error('Error updating account');
+    }
+};

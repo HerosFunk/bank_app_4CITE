@@ -11,7 +11,13 @@ exports.createAccount = async (req, res) => {
 };
 
 exports.sendToAccount = async (req, res) => {
-
+    try {
+        const { fromAccountId, toAccountId, amount } = req.body;
+        await accountBusiness.sendToAccount(fromAccountId, toAccountId, amount);
+        res.status(200).json({ message: 'Transfer successful' });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
 exports.getAccountInfo = async (req, res) => {
