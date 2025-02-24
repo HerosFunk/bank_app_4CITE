@@ -16,6 +16,10 @@ exports.getAccountById = async (accountId) => {
 };
 
 exports.sendToAccount = async (fromAccountId, toAccountId, amount) => {
+    if (amount <= 0) {
+        throw new Error('Invalid transfer amount');
+    }
+
     const fromAccount = await accountService.getAccountById(fromAccountId);
     const toAccount = await accountService.getAccountById(toAccountId);
 

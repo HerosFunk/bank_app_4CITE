@@ -16,7 +16,11 @@ exports.sendToAccount = async (req, res) => {
         await accountBusiness.sendToAccount(fromAccountId, toAccountId, amount);
         res.status(200).json({ message: 'Transfer successful' });
     } catch (error) {
-        res.status(400).json({ error: error.message });
+        if (error.message === 'Negative transfer amount') {
+            res.status(400).json({ error: 'Transfer amount must be positive' });
+        } else {
+            res.status(400).json({ error: error.message });
+        }
     }
 };
 
