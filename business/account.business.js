@@ -19,6 +19,10 @@ exports.sendToAccount = async (fromAccountId, toAccountId, amount) => {
     const fromAccount = await accountService.getAccountById(fromAccountId);
     const toAccount = await accountService.getAccountById(toAccountId);
 
+    if (fromAccount.amount < amount) {
+        throw new Error('Insufficient funds');
+    }
+
     fromAccount.amount -= amount;
     toAccount.amount += amount;
 

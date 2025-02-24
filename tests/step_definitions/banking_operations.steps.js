@@ -39,3 +39,26 @@ Then('Account B should have {int} units', async function (expectedAmount) {
         throw new Error(`Expected Account B to have ${expectedAmount} units but got ${account.amount}`);
     }
 });
+
+Then('the transfer should fail with an error message {string}', function (expectedErrorMessage) {
+    if (response.status !== 400) {
+        throw new Error(`Expected status 400 but got ${response.status}`);
+    }
+    if (response.body.error !== expectedErrorMessage) {
+        throw new Error(`Expected error message "${expectedErrorMessage}" but got "${response.body.error}"`);
+    }
+});
+
+Then('Account A should still have {int} units', async function (expectedAmount) {
+    const account = await accountService.getAccountById(accountAId);
+    if (account.amount !== expectedAmount) {
+        throw new Error(`Expected Account A to still have ${expectedAmount} units but got ${account.amount}`);
+    }
+});
+
+Then('Account B should still have {int} units', async function (expectedAmount) {
+    const account = await accountService.getAccountById(accountBId);
+    if (account.amount !== expectedAmount) {
+        throw new Error(`Expected Account B to still have ${expectedAmount} units but got ${account.amount}`);
+    }
+});
