@@ -20,3 +20,11 @@ Feature: Banking operations between two accounts
         When the user sends 200 units from Account A to a non-existent Account B
         Then the transfer should fail with an error message "Account not found"
         And Account A should still have 1000 units
+
+    Scenario: A user tries to send a negative amount of money from Account A to Account B
+        Given Account A with id "accountA" has 1000 units
+        And Account B with id "accountB" has 500 units
+        When the user sends -200 units from Account A to Account B
+        Then the transfer should fail with an error message "Invalid transfer amount"
+        And Account A should still have 1000 units
+        And Account B should still have 500 units
